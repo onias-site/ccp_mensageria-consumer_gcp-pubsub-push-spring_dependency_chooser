@@ -1,0 +1,7 @@
+runtime: java17
+instance_class: F1
+env: standard
+service: jn-dependency-chooser-mensageria-consumer-gcp-pubsub-push-spring
+handlers:
+  - url: .*
+    script: auto
