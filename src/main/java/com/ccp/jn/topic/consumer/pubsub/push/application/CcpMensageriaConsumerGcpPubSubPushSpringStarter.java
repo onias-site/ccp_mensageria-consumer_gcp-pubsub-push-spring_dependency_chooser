@@ -35,7 +35,7 @@ import com.jn.mensageria.JnMensageriaReceiver;
 @RestController
 @RequestMapping(value = "/{topic}")
 @SpringBootApplication
-public class JnGcpPubSubPushApplicationStarter {
+public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 
 	public static void main(String[] args) {
 		CcpDependencyInjection.loadAllDependencies( 
@@ -49,7 +49,7 @@ public class JnGcpPubSubPushApplicationStarter {
 				new CcpApacheMimeHttp(),
 				new CcpGcpFileBucket()  
 				);
-		SpringApplication.run(JnGcpPubSubPushApplicationStarter.class, args);
+		SpringApplication.run(CcpMensageriaConsumerGcpPubSubPushSpringStarter.class, args);
 	}
 	@PostMapping
 	public void onReceiveMessage(@PathVariable("topic") String topic, @RequestBody Map<String, Object> body) {
