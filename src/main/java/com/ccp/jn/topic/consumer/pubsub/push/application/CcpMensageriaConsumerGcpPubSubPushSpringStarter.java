@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.decorators.CcpStringDecorator;
+import com.ccp.decorators.CcpJsonRepresentation.CcpJsonFieldName;
 import com.ccp.dependency.injection.CcpDependencyInjection;
 import com.ccp.implementations.db.bulk.elasticsearch.CcpElasticSerchDbBulk;
 import com.ccp.implementations.db.crud.elasticsearch.CcpElasticSearchCrud;
@@ -29,7 +30,10 @@ import com.ccp.implementations.json.gson.CcpGsonJsonHandler;
 import com.jn.business.commons.JnBusinessNotifyError;
 import com.jn.entities.JnEntityAsyncTask;
 import com.jn.mensageria.JnMensageriaReceiver;
-
+enum CcpMensageriaConsumerGcpPubSubPushSpringStarterConstants  implements CcpJsonFieldName{
+	message
+	
+}
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 @CrossOrigin
 @RestController
@@ -54,8 +58,8 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 	@PostMapping
 	public void onReceiveMessage(@PathVariable("topic") String topic, @RequestBody Map<String, Object> body) {
 		CcpJsonRepresentation ccpMapDecorator = new CcpJsonRepresentation(body);
-		CcpJsonRepresentation internalMap = ccpMapDecorator.getInnerJson("message");
-		String data = internalMap.getAsString(JnEntityAsyncTask.Fields.data.name());
+		CcpJsonRepresentation internalMap = ccpMapDecorator.getInnerJson(CcpMensageriaConsumerGcpPubSubPushSpringStarterConstants.message);
+		String data = internalMap.getAsString(JnEntityAsyncTask.Fields.data);
 		String str = new CcpStringDecorator(data).text().asBase64().content;
 		CcpJsonRepresentation json = new CcpJsonRepresentation(str);
 		JnMensageriaReceiver.INSTANCE.executeProcess(
