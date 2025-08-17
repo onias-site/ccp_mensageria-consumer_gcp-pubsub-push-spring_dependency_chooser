@@ -30,16 +30,15 @@ import com.ccp.implementations.json.gson.CcpGsonJsonHandler;
 import com.jn.business.commons.JnBusinessNotifyError;
 import com.jn.entities.JnEntityAsyncTask;
 import com.jn.mensageria.JnMensageriaReceiver;
-enum CcpMensageriaConsumerGcpPubSubPushSpringStarterConstants  implements CcpJsonFieldName{
-	message
-	
-}
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/{topic}")
 @SpringBootApplication
 public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
+	enum JsonFieldNames implements CcpJsonFieldName{
+		message
+	}
 
 	public static void main(String[] args) {
 		CcpDependencyInjection.loadAllDependencies( 
@@ -58,7 +57,7 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 	@PostMapping
 	public void onReceiveMessage(@PathVariable("topic") String topic, @RequestBody Map<String, Object> body) {
 		CcpJsonRepresentation ccpMapDecorator = new CcpJsonRepresentation(body);
-		CcpJsonRepresentation internalMap = ccpMapDecorator.getInnerJson(CcpMensageriaConsumerGcpPubSubPushSpringStarterConstants.message);
+		CcpJsonRepresentation internalMap = ccpMapDecorator.getInnerJson(JsonFieldNames.message);
 		String data = internalMap.getAsString(JnEntityAsyncTask.Fields.data);
 		String str = new CcpStringDecorator(data).text().asBase64().content;
 		CcpJsonRepresentation json = new CcpJsonRepresentation(str);
