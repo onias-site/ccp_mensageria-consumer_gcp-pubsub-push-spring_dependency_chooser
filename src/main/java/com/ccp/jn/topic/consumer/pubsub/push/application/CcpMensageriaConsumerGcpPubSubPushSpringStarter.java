@@ -33,7 +33,7 @@ import com.jn.mensageria.JnMensageriaReceiver;
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/{topic}")
+@RequestMapping("/{topic}")
 @SpringBootApplication
 public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 	enum JsonFieldNames implements CcpJsonFieldName{
