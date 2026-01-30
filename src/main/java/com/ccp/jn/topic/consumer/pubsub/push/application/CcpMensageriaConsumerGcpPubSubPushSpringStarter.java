@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.decorators.CcpStringDecorator;
 import com.ccp.decorators.CcpJsonRepresentation.CcpJsonFieldName;
+import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.dependency.injection.CcpDependencyInjection;
 import com.ccp.implementations.db.bulk.elasticsearch.CcpElasticSerchDbBulk;
 import com.ccp.implementations.db.crud.elasticsearch.CcpElasticSearchCrud;
@@ -56,8 +57,8 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 	}
 	@PostMapping
 	public void onReceiveMessage(@PathVariable("topic") String topic, @RequestBody Map<String, Object> body) {
-		CcpJsonRepresentation ccpMapDecorator = new CcpJsonRepresentation(body);
-		CcpJsonRepresentation internalMap = ccpMapDecorator.getInnerJson(JsonFieldNames.message);
+		CcpJsonRepresentation CcpJsonRepresentation = new CcpJsonRepresentation(body);
+		CcpJsonRepresentation internalMap = CcpJsonRepresentation.getInnerJson(JsonFieldNames.message);
 		String data = internalMap.getAsString(JnEntityAsyncTask.Fields.data);
 		String str = new CcpStringDecorator(data).text().asBase64().content;
 		CcpJsonRepresentation json = new CcpJsonRepresentation(str);
