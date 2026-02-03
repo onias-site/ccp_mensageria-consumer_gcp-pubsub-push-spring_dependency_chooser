@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.decorators.CcpStringDecorator;
 import com.ccp.decorators.CcpJsonRepresentation.CcpJsonFieldName;
-import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.dependency.injection.CcpDependencyInjection;
 import com.ccp.implementations.db.bulk.elasticsearch.CcpElasticSerchDbBulk;
 import com.ccp.implementations.db.crud.elasticsearch.CcpElasticSearchCrud;
