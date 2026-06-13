@@ -35,6 +35,11 @@ import com.jn.mensageria.JnMensageriaReceiver;
 @RestController
 @RequestMapping("/{topic}")
 @SpringBootApplication
+/**
+ * Aplicação Spring Boot que recebe mensagens Pub/Sub push via endpoint REST {@code /{topic}}.
+ * Inicializa as dependências de DI (Elasticsearch, Telegram, SendGrid, etc.) e delega o
+ * processamento de cada mensagem ao {@code JnMensageriaReceiver}.
+ */
 public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 	enum JsonFieldNames implements CcpJsonFieldName{
 		message
