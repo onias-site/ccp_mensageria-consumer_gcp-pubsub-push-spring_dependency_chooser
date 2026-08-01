@@ -70,7 +70,7 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 				JnEntityAsyncTask.ENTITY, 
 				topic, 
 				json,  
-				JnBusinessNotifyError.INSTANCE
+				JnBusinessNotifyError.INSTANCE 
 				);
 	}
 
@@ -79,7 +79,7 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 		CcpJsonRepresentation md = new CcpJsonRepresentation(json);
 		JnMensageriaReceiver.INSTANCE.executeProcess(
 				JnEntityAsyncTask.ENTITY, 
-				topic, 
+				topic,  
 				md, 
 				JnBusinessNotifyError.INSTANCE
 				);
