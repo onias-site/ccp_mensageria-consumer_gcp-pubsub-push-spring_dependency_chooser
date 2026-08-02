@@ -78,7 +78,7 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 	public void onReceiveMessageTesting(@PathVariable("topic") String topic, @RequestBody Map<String, Object> json) {
 		CcpJsonRepresentation md = new CcpJsonRepresentation(json);
 		JnMensageriaReceiver.INSTANCE.executeProcess(
-				JnEntityAsyncTask.ENTITY, 
+				JnEntityAsyncTask.ENTITY,  
 				topic,  
 				md, 
 				JnBusinessNotifyError.INSTANCE
