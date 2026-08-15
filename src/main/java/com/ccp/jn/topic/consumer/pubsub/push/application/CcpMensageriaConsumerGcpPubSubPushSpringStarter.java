@@ -27,7 +27,7 @@ import com.ccp.implementations.file.bucket.gcp.CcpGcpFileBucket;
 import com.ccp.implementations.http.apache.mime.CcpApacheMimeHttp;
 import com.ccp.implementations.instant.messenger.telegram.CcpTelegramInstantMessenger;
 import com.ccp.implementations.json.gson.CcpGsonJsonHandler;
-import com.jn.business.messages.JnBusinessNotifyError;
+import com.jn.business.messages.JnMessages.JnBusinessNotifyError;
 import com.jn.entities.JnEntityAsyncTask;
 import com.jn.mensageria.JnMensageriaReceiver;
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
@@ -70,7 +70,7 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 				JnEntityAsyncTask.ENTITY, 
 				topic, 
 				json,  
-				JnBusinessNotifyError.INSTANCE 
+				JnBusinessNotifyError.instance 
 				);
 	}
 
@@ -81,7 +81,7 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 				JnEntityAsyncTask.ENTITY,  
 				topic,  
 				md, 
-				JnBusinessNotifyError.INSTANCE
+				JnBusinessNotifyError.instance
 				);
 	}
 
