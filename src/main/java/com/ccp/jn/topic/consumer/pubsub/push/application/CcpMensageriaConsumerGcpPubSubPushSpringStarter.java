@@ -68,7 +68,7 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 		CcpJsonRepresentation json = new CcpJsonRepresentation(str);
 		JnMensageriaReceiver.INSTANCE.executeProcess(
 				JnEntityAsyncTask.ENTITY, 
-				topic, 
+				topic,  
 				json,  
 				JnBusinessNotifyError.instance 
 				);
