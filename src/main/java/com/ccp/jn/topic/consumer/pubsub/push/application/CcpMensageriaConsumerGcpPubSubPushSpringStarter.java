@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.decorators.CcpStringDecorator;
-import com.ccp.decorators.CcpJsonRepresentation.CcpJsonFieldName;
+import com.ccp.decorators.CcpJsonFieldName;
 import com.ccp.dependency.injection.CcpDependencyInjection;
 import com.ccp.implementations.db.bulk.elasticsearch.CcpElasticSerchDbBulk;
 import com.ccp.implementations.db.crud.elasticsearch.CcpElasticSearchCrud;
@@ -27,9 +27,10 @@ import com.ccp.implementations.file.bucket.gcp.CcpGcpFileBucket;
 import com.ccp.implementations.http.apache.mime.CcpApacheMimeHttp;
 import com.ccp.implementations.instant.messenger.telegram.CcpTelegramInstantMessenger;
 import com.ccp.implementations.json.gson.CcpGsonJsonHandler;
-import com.jn.business.messages.JnMessages.JnBusinessNotifyError;
+import com.jn.business.messages.JnBusinessNotifyError;
 import com.jn.entities.JnEntityAsyncTask;
 import com.jn.mensageria.JnMensageriaReceiver;
+import com.ccp.decorators.CcpTextDecorator;
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 @CrossOrigin
 @RestController
@@ -46,16 +47,25 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 	}
 
 	public static void main(String[] args) {
+		CcpElasticSearchQueryExecutor ccpElasticSearchQueryExecutor = new CcpElasticSearchQueryExecutor();
+		CcpTelegramInstantMessenger ccpTelegramInstantMessenger = new CcpTelegramInstantMessenger();
+		CcpElasticSearchDbRequest ccpElasticSearchDbRequest = new CcpElasticSearchDbRequest();
+		CcpSendGridEmailSender ccpSendGridEmailSender = new CcpSendGridEmailSender();
+		CcpElasticSerchDbBulk ccpElasticSerchDbBulk = new CcpElasticSerchDbBulk();
+		CcpElasticSearchCrud ccpElasticSearchCrud = new CcpElasticSearchCrud();
+		CcpGsonJsonHandler ccpGsonJsonHandler = new CcpGsonJsonHandler();
+		CcpApacheMimeHttp ccpApacheMimeHttp = new CcpApacheMimeHttp();
+		CcpGcpFileBucket ccpGcpFileBucket = new CcpGcpFileBucket();
 		CcpDependencyInjection.loadAllDependencies( 
-				new CcpElasticSearchQueryExecutor(),
-				new CcpTelegramInstantMessenger(),
-				new CcpElasticSearchDbRequest(),
-				new CcpSendGridEmailSender(),
-				new CcpElasticSerchDbBulk(),
-				new CcpElasticSearchCrud(),
-				new CcpGsonJsonHandler(),
-				new CcpApacheMimeHttp(),
-				new CcpGcpFileBucket()  
+				ccpElasticSearchQueryExecutor,
+				ccpTelegramInstantMessenger,
+				ccpElasticSearchDbRequest,
+				ccpSendGridEmailSender,
+				ccpElasticSerchDbBulk,
+				ccpElasticSearchCrud,
+				ccpGsonJsonHandler,
+				ccpApacheMimeHttp,
+				ccpGcpFileBucket  
 				);
 		SpringApplication.run(CcpMensageriaConsumerGcpPubSubPushSpringStarter.class, args);
 	}
@@ -64,7 +74,10 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 		CcpJsonRepresentation CcpJsonRepresentation = new CcpJsonRepresentation(body);
 		CcpJsonRepresentation internalMap = CcpJsonRepresentation.getInnerJson(JsonFieldNames.message);
 		String data = internalMap.getAsString(JnEntityAsyncTask.Fields.data);
-		String str = new CcpStringDecorator(data).text().asBase64().content;
+		CcpStringDecorator ccpStringDecorator = new CcpStringDecorator(data);
+		CcpTextDecorator ccpStringDecoratorText = ccpStringDecorator.text();
+		var asBase64 = ccpStringDecoratorText.asBase64();
+		String str = asBase64.content;
 		CcpJsonRepresentation json = new CcpJsonRepresentation(str);
 		JnMensageriaReceiver.INSTANCE.executeProcess(
 				JnEntityAsyncTask.ENTITY, 
