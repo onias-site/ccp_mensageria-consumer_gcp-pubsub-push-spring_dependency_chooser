@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ccp.decorators.CcpJsonFieldName;
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.decorators.CcpStringDecorator;
-import com.ccp.decorators.CcpJsonFieldName;
+import com.ccp.decorators.CcpTextDecorator;
 import com.ccp.dependency.injection.CcpDependencyInjection;
 import com.ccp.implementations.db.bulk.elasticsearch.CcpElasticSerchDbBulk;
 import com.ccp.implementations.db.crud.elasticsearch.CcpElasticSearchCrud;
@@ -30,7 +31,6 @@ import com.ccp.implementations.json.gson.CcpGsonJsonHandler;
 import com.jn.business.messages.JnBusinessNotifyError;
 import com.jn.entities.JnEntityAsyncTask;
 import com.jn.mensageria.JnMensageriaReceiver;
-import com.ccp.decorators.CcpTextDecorator;
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 @CrossOrigin
 @RestController
@@ -57,6 +57,7 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 		CcpApacheMimeHttp ccpApacheMimeHttp = new CcpApacheMimeHttp();
 		CcpGcpFileBucket ccpGcpFileBucket = new CcpGcpFileBucket();
 		CcpDependencyInjection.loadAllDependencies( 
+//LATER				CcpLocalInstances.syncMensageriaListener,
 				ccpElasticSearchQueryExecutor,
 				ccpTelegramInstantMessenger,
 				ccpElasticSearchDbRequest,
