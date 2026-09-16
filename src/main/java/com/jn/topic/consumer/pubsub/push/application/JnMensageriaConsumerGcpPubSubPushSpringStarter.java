@@ -1,4 +1,4 @@
-package com.ccp.jn.topic.consumer.pubsub.push.application;
+package com.jn.topic.consumer.pubsub.push.application;
 
 
 import java.util.Map;
@@ -40,7 +40,7 @@ import com.jn.mensageria.JnMensageriaReceiver;
  * Inicializa as dependências de DI (Elasticsearch, Telegram, SendGrid, etc.) e delega o
  * processamento de cada mensagem ao {@code JnMensageriaReceiver}.
  */
-public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
+public class JnMensageriaConsumerGcpPubSubPushSpringStarter {
 	enum JsonFieldNames implements CcpJsonFieldName{
 		message
 	}
@@ -67,7 +67,7 @@ public class CcpMensageriaConsumerGcpPubSubPushSpringStarter {
 				ccpApacheMimeHttp,
 				ccpGcpFileBucket  
 				);
-		SpringApplication.run(CcpMensageriaConsumerGcpPubSubPushSpringStarter.class, args);
+		SpringApplication.run(JnMensageriaConsumerGcpPubSubPushSpringStarter.class, args);
 	}
 	@PostMapping
 	public void onReceiveMessage(@PathVariable("topic") String topic, @RequestBody Map<String, Object> body) {
