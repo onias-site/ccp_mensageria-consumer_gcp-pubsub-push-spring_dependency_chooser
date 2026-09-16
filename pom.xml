@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ccp.jn</groupId>
-	<artifactId>ccp_mensageria-consumer_gcp-pubsub-push-spring_dependency</artifactId>
+	<artifactId>jn_mensageria-consumer_gcp-pubsub-push-spring_dependency</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<parent>
@@ -18,7 +18,6 @@
 			<groupId>com.ccp.jn</groupId>
 			<artifactId>jn_business_jobsnow</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-
 		</dependency>
 		<dependency>
 			<groupId>com.ccp</groupId>
